@@ -1,18 +1,7 @@
 // Plugins
 var gulp = require('gulp'); // https://github.com/gulpjs/gulp
 var sass = require('gulp-sass'); // https://github.com/dlmanning/gulp-sass
-var jshint = require('gulp-jshint'); // https://github.com/spenceralger/gulp-jshint
-var stylish = require('jshint-stylish'); // https://github.com/sindresorhus/jshint-stylish
 var webserver = require('gulp-webserver'); // https://github.com/schickling/gulp-webserver
-
-
-
-// JSHint
-gulp.task('jshint', function() {
-  return gulp.src('js/components/**/*.js')
-  .pipe( jshint() )
-  .pipe( jshint.reporter(stylish) );
-});
 
 
 
@@ -43,11 +32,10 @@ gulp.task('webserver', function() {
 
 // Tasks
 gulp.task('dev', ['sass', 'watch', 'webserver']);
+
 gulp.task('watch', function() {
   gulp.watch(['css/**/*.scss'], ['sass']);
 });
-
-
 
 // List Commands
 gulp.task('default', function() {
@@ -63,7 +51,6 @@ gulp.task('default', function() {
   console.log( highlight('dev ')+ '[sass, watch, webserver]');
   console.log( highlight('watch ')+ '[sass]');
   console.log( highlight('sass') );
-  console.log( highlight('jshint') );
   console.log( highlight('webserver') );
 
   // Space
