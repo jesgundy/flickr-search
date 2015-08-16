@@ -52,12 +52,14 @@
 
   <script type="text/html" id="photosTemplate">
     <ul>
-      <li>
-        <a href="#">
-          <img src="https://farm1.staticflickr.com/564/20617414625_ab1db43cb7_s.jpg" alt="Description">
-          <span class="viewCount">12345</span>
-        </a>
-      </li>
+      <% _.each(photos, function(photo) { %>
+        <li>
+          <a href="<%= photo.linkUrl %>">
+            <img src="<%= photo.url_sq %>" alt="<%= photo.title %>">
+            <span class="viewCount"><%= photo.views %></span>
+          </a>
+        </li>
+      <% }); %>
     </ul>
   </script>
 

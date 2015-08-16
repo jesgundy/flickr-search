@@ -89,7 +89,8 @@ $(function() {
 
 
     renderPhotos: function () {
-      this.$('.results').html( this.photosTemplate() );
+      var data = { photos: this.photoCollection.toJSON() };
+      this.$('.results').html( this.photosTemplate(data) );
     },
 
 
