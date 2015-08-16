@@ -2,10 +2,33 @@
 $(function() {
 
 
+  // Photo Collection
+  var PhotoCollection = Backbone.Collection.extend({
+    queryString: '', // container for the query string
+
+
+    url: function () {
+      var url = 'https://api.flickr.com/services/rest/';
+      url += '?method=flickr.photos.search';
+      url += '&api_key=4e258a4396bf5ba0448b2e2fe574034e';
+      url += '&text=' + this.queryString;
+      url += '&format=json';
+      url += '&nojsoncallback=1';
+      return url;
+    },
+
+
+    parse: function (response) {
+      return response.photos.photo;
+    }
+  });
+
+
 
   // Flickr Search Constructor
   var FlickrSearch = Backbone.View.extend({
     el: '.container',
+    queryString: '', // container for the query string
 
 
     events: {
@@ -14,6 +37,7 @@ $(function() {
 
 
     initialize: function () {
+      this.photoCollection = new PhotoCollection();
       this.getInlineTemplates();
       this.renderPlaceholder();
     },
@@ -27,15 +51,16 @@ $(function() {
     },
 
 
-    search: _.debounce(function () {
-      var query = this.$('#searchInput').val();
+    search: function () {
+      this.queryString = this.$('#searchInput').val();
 
-      if (query.length) {
+      if (this.queryString.length) {
         this.renderLoading();
+        this.queryFlickr();
       } else {
         this.renderPlaceholder();
       }
-    }, 500),
+    },
 
 
     renderPlaceholder: function () {
@@ -50,7 +75,20 @@ $(function() {
 
     renderPhotos: function () {
       this.$('.results').html( this.photosTemplate() );
-    }
+    },
+
+
+    queryFlickr: _.debounce(function () {
+      this.photoCollection.queryString = this.queryString;
+      this.photoCollection.fetch({
+        success: function (collection) {
+          console.log(collection.toJSON());
+        },
+        error: function (response, error, options) {
+          alert('There was an error querying the Flickr API.')
+        }
+      });
+    }, 500),
   });
 
 
