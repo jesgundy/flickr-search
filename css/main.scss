@@ -14,8 +14,32 @@
 
 
 
-// Global
+// No-JS
+.no-js-warning {
+  color: red;
+  display: none;
+  font-weight: bold;
 
+  html.no-js & {
+    display: block;
+  }
+}
+html.no-js #searchInput {
+  display: none;
+}
+
+
+
+// Global
 .container {
   padding: 1em 2em;
 }
+
+
+
+// Header
+.header {
+  padding-right: 2em; // compensate for content-box input layout
+  text-align: center;
+}
+

@@ -11,18 +11,23 @@
 
   <!-- JS Detection -->
   <script type="text/javascript">
-    var docElement = document.documentElement;
-    docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') + ' js ';
+    document.documentElement.className = document.documentElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') + 'js';
   </script>
 </head>
 <body>
+
 
 
   <!-- HTML -->
   <div class="container">
     <div class="header" role="banner">
       <h1>Search Flickr</h1>
+
       <input type="search" id="searchInput" name="searchInput" placeholder="Enter Search Term">
+
+      <div class="no-js-warning">
+        <p>JavaScript must be running to utilize this application.</p>
+      </div>
     </div>
 
     <div class="results" role="main"></div>

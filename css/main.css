@@ -490,5 +490,19 @@ td, th {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+.no-js-warning {
+  color: red;
+  display: none;
+  font-weight: bold; }
+  html.no-js .no-js-warning {
+    display: block; }
+
+html.no-js #searchInput {
+  display: none; }
+
 .container {
   padding: 1em 2em; }
+
+.header {
+  padding-right: 2em;
+  text-align: center; }
