@@ -33,6 +33,8 @@ html.no-js #searchInput {
 
 // Layout
 .container {
+  margin: 0 auto;
+  max-width: 650px;
   padding: 1em 2em;
 }
 
@@ -44,7 +46,7 @@ html.no-js #searchInput {
 
 // Header
 .header {
-  padding-right: 1.5em; // compensate for content-box input layout
+  padding-right: 1.25em; // compensate for content-box input layout
   text-align: center;
 }
 
@@ -73,15 +75,14 @@ html.no-js #searchInput {
   list-style: none;
   margin: 0;
   padding: 0;
+  text-align: center;
 
   li {
-    display: block;
-    float: left;
+    display: inline-block;
     height: 75px;
     line-height: 1;
     overflow: hidden;
     position: relative;
-    text-align: center;
     width: 75px;
   }
 
@@ -94,7 +95,7 @@ html.no-js #searchInput {
       @include transition(opacity 0.2s ease-in-out);
       height: 75px;
       left: 0;
-      opacity: 0.3;
+      opacity: 0.25;
       position: absolute;
       top: 0;
       width: 75px;
@@ -102,12 +103,15 @@ html.no-js #searchInput {
     }
 
     span {
-      @include transition(opacity 0.2s ease-in-out);
+      @include transition(opacity 0.15s ease-in-out);
       color: #000;
       text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
       display: block;
-      font-size: 1.5em;
-      margin-top: 1.25em;
+      font-size: 1.25em;
+      overflow: hidden;
+      padding: 1.5em 0.25em 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &:hover {

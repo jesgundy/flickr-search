@@ -54,7 +54,7 @@
     <ul class="photoList">
       <% _.each(photos, function(photo) { %>
         <li>
-          <a href="<%= photo.linkUrl %>">
+          <a href="<%= photo.linkUrl %>" target="_blank">
             <img src="<%= photo.url_sq %>" alt="<%= photo.title %>">
             <span class="viewCount"><%= photo.views %></span>
           </a>
