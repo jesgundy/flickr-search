@@ -94,13 +94,15 @@ $(function() {
 
 
     queryFlickr: _.debounce(function () {
-      this.photoCollection.queryString = this.queryString;
-      this.photoCollection.fetch({
+      var self = this;
+      self.photoCollection.queryString = self.queryString;
+
+      self.photoCollection.fetch({
         success: function (collection) {
-          console.log(collection.toJSON());
+          self.renderPhotos();
         },
         error: function (response, error, options) {
-          alert('There was an error querying the Flickr API.')
+          alert('There was an error querying the Flickr API.');
         }
       });
     }, 500),
