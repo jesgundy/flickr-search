@@ -34,6 +34,9 @@ $(function() {
 
 
     parse: function (response) {
+      if (response.stat == 'fail') {
+        return null;
+      }
       return response.photos.photo;
     }
   });
@@ -83,6 +86,11 @@ $(function() {
     },
 
 
+    renderNoResults: function () {
+      this.$('.results').html( this.noResultsTemplate() );
+    },
+
+
     renderLoading: function () {
       this.$('.results').html( this.loadingTemplate() );
     },
@@ -100,7 +108,11 @@ $(function() {
 
       self.photoCollection.fetch({
         success: function (collection) {
-          self.renderPhotos();
+          if (collection.length) {
+            self.renderPhotos();
+          } else {
+            self.renderNoResults();
+          }
         },
         error: function (response, error, options) {
           alert('There was an error querying the Flickr API.');

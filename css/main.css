@@ -510,11 +510,15 @@ html.no-js #searchInput {
   padding-right: 1.5em;
   text-align: center; }
 
-.placeholder, .noResults {
-  color: #CCC;
-  font-style: italic;
+.message {
   padding-top: 4em;
   text-align: center; }
+  .message.placeholder {
+    color: #CCC;
+    font-style: italic; }
+  .message.noResults {
+    color: red;
+    font-weight: bold; }
 
 .progress-bar {
   background-color: #f2f2f2;

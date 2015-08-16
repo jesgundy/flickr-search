@@ -51,13 +51,23 @@ html.no-js #searchInput {
 
 
 // Messaging
-.placeholder,
-.noResults {
-  color: #CCC;
-  font-style: italic;
+.message {
   padding-top: 4em;
   text-align: center;
+
+  &.placeholder {
+    color: #CCC;
+    font-style: italic;
+  }
+
+  &.noResults {
+    color: red;
+    font-weight: bold;
+  }
 }
+
+
+
 
 
 
