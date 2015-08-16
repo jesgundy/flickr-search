@@ -67,7 +67,7 @@ $(function() {
 
 
     search: function () {
-      this.queryString = this.$('#searchInput').val();
+      this.queryString = $.trim( this.$('#searchInput').val() );
 
       if (this.queryString.length) {
         this.renderLoading();
