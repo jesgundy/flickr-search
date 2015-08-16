@@ -8,6 +8,11 @@ $(function() {
     el: '.container',
 
 
+    events: {
+      'keyup #searchInput': 'search'
+    },
+
+
     initialize: function () {
       this.getInlineTemplates();
       this.render();
@@ -23,7 +28,13 @@ $(function() {
 
     render: function () {
       this.$('.results').html( this.placeholderTemplate() );
-    }
+    },
+
+
+    search: _.debounce(function () {
+      var query = this.$('#searchInput').val();
+      console.log(query);
+    }, 500)
   });
 
 
