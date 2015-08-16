@@ -503,6 +503,15 @@ html.no-js #searchInput {
 .container {
   padding: 1em 2em; }
 
+.results {
+  padding-top: 1em; }
+
 .header {
-  padding-right: 2em;
+  padding-right: 1.5em;
+  text-align: center; }
+
+.placeholder, .noResults {
+  color: #CCC;
+  font-style: italic;
+  padding-top: 4em;
   text-align: center; }

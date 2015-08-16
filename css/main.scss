@@ -24,22 +24,37 @@
     display: block;
   }
 }
+
 html.no-js #searchInput {
   display: none;
 }
 
 
 
-// Global
+// Layout
 .container {
   padding: 1em 2em;
+}
+
+.results {
+  padding-top: 1em;
 }
 
 
 
 // Header
 .header {
-  padding-right: 2em; // compensate for content-box input layout
+  padding-right: 1.5em; // compensate for content-box input layout
   text-align: center;
 }
 
+
+
+// Messaging
+.placeholder,
+.noResults {
+  color: #CCC;
+  font-style: italic;
+  padding-top: 4em;
+  text-align: center;
+}
