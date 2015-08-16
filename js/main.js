@@ -15,7 +15,7 @@ $(function() {
 
     initialize: function () {
       this.getInlineTemplates();
-      this.render();
+      this.renderPlaceholder();
     },
 
 
@@ -26,15 +26,25 @@ $(function() {
     },
 
 
-    render: function () {
+    search: _.debounce(function () {
+      var query = this.$('#searchInput').val();
+
+      if (query.length) {
+        this.renderPhotos();
+      } else {
+        this.renderPlaceholder();
+      }
+    }, 500),
+
+
+    renderPlaceholder: function () {
       this.$('.results').html( this.placeholderTemplate() );
     },
 
 
-    search: _.debounce(function () {
-      var query = this.$('#searchInput').val();
-      console.log(query);
-    }, 500)
+    renderPhotos: function () {
+      this.$('.results').html( this.photosTemplate() );
+    }
   });
 
 
