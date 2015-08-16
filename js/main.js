@@ -21,6 +21,7 @@ $(function() {
 
     getInlineTemplates: function () {
       this.placeholderTemplate = _.template( $('#placeholderTemplate').html() );
+      this.loadingTemplate = _.template( $('#loadingTemplate').html() );
       this.noResultsTemplate = _.template( $('#noResultsTemplate').html() );
       this.photosTemplate = _.template( $('#photosTemplate').html() );
     },
@@ -30,7 +31,7 @@ $(function() {
       var query = this.$('#searchInput').val();
 
       if (query.length) {
-        this.renderPhotos();
+        this.renderLoading();
       } else {
         this.renderPlaceholder();
       }
@@ -39,6 +40,11 @@ $(function() {
 
     renderPlaceholder: function () {
       this.$('.results').html( this.placeholderTemplate() );
+    },
+
+
+    renderLoading: function () {
+      this.$('.results').html( this.loadingTemplate() );
     },
 
 
