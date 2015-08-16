@@ -2,8 +2,22 @@
 $(function() {
 
 
+
+  var PhotoModel = Backbone.Model.extend({
+    parse: function (response) {
+      // Map photo url (http://cl.ly/cFWK)
+      response.linkUrl = 'https://www.flickr.com/photos/';
+      response.linkUrl += response.owner + '/';
+      response.linkUrl += response.id;
+      return response;
+    }
+  });
+
+
+
   // Photo Collection
   var PhotoCollection = Backbone.Collection.extend({
+    model: PhotoModel,
     queryString: '', // container for the query string
 
 
@@ -12,6 +26,7 @@ $(function() {
       url += '?method=flickr.photos.search';
       url += '&api_key=4e258a4396bf5ba0448b2e2fe574034e';
       url += '&text=' + this.queryString;
+      url += '&extras=views,url_sq'; // include viewcount in query
       url += '&format=json';
       url += '&nojsoncallback=1';
       return url;
