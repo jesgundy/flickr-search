@@ -68,6 +68,59 @@ html.no-js #searchInput {
 
 
 
+// Photo List
+.photoList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: block;
+    float: left;
+    height: 75px;
+    line-height: 1;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 75px;
+  }
+
+  a {
+    width: 75px;
+    height: 75px;
+    display: block;
+
+    img {
+      @include transition(opacity 0.2s ease-in-out);
+      height: 75px;
+      left: 0;
+      opacity: 0.3;
+      position: absolute;
+      top: 0;
+      width: 75px;
+      z-index: -1;
+    }
+
+    span {
+      @include transition(opacity 0.2s ease-in-out);
+      color: #000;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+      display: block;
+      font-size: 1.5em;
+      margin-top: 1.25em;
+    }
+
+    &:hover {
+      img {
+        opacity: 1;
+      }
+
+      span {
+        opacity: 0;
+      }
+    }
+  }
+}
 
 
 

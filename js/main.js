@@ -70,7 +70,13 @@ $(function() {
 
 
     search: function () {
-      this.queryString = $.trim( this.$('#searchInput').val() );
+      var newQueryString = $.trim( this.$('#searchInput').val() );
+
+      if (newQueryString == this.queryString) {
+        return;
+      }
+
+      this.queryString = newQueryString;
 
       if (this.queryString.length) {
         this.renderLoading();
