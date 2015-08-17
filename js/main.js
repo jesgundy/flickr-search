@@ -181,6 +181,7 @@ $(function() {
 
 
     loadMorePhotos: function () {
+      this.$('.loader').html( this.progressTemplate() );
       this.photoCollection.currentPage++;
       this.queryFlickr();
     }
