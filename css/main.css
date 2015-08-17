@@ -502,7 +502,7 @@ html.no-js #searchInput {
 
 .container {
   margin: 0 auto;
-  max-width: 650px;
+  max-width: 52em;
   padding: 1em 2em; }
 
 .results {
@@ -516,7 +516,7 @@ html.no-js #searchInput {
   padding-top: 4em;
   text-align: center; }
   .message.placeholder {
-    color: #CCC;
+    color: #aaa;
     font-style: italic; }
   .message.noResults {
     color: red;
@@ -531,6 +531,7 @@ html.no-js #searchInput {
     display: inline-block;
     height: 75px;
     line-height: 1;
+    margin: 0 0.1em;
     overflow: hidden;
     position: relative;
     width: 75px; }
@@ -565,6 +566,16 @@ html.no-js #searchInput {
       opacity: 1; }
     .photoList a:hover span {
       opacity: 0; }
+
+.loader {
+  text-align: center;
+  padding-top: 2em; }
+  .loader .counter {
+    font-style: italic;
+    color: #aaa; }
+  .loader .loadMorePhotos {
+    margin-top: 0.5em;
+    padding: 0.25em 1em; }
 
 .progress-bar {
   background-color: #f2f2f2;

@@ -34,7 +34,7 @@ html.no-js #searchInput {
 // Layout
 .container {
   margin: 0 auto;
-  max-width: 650px;
+  max-width: 52em;
   padding: 1em 2em;
 }
 
@@ -58,7 +58,7 @@ html.no-js #searchInput {
   text-align: center;
 
   &.placeholder {
-    color: #CCC;
+    color: #aaa;
     font-style: italic;
   }
 
@@ -81,6 +81,7 @@ html.no-js #searchInput {
     display: inline-block;
     height: 75px;
     line-height: 1;
+    margin: 0 0.1em;
     overflow: hidden;
     position: relative;
     width: 75px;
@@ -123,6 +124,24 @@ html.no-js #searchInput {
         opacity: 0;
       }
     }
+  }
+}
+
+
+
+// Loader
+.loader {
+  text-align: center;
+  padding-top: 2em;
+
+  .counter {
+    font-style: italic;
+    color: #aaa;
+  }
+
+  .loadMorePhotos {
+    margin-top: 0.5em;
+    padding: 0.25em 1em;
   }
 }
 

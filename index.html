@@ -44,23 +44,30 @@
     <div class="message noResults">No photos found. Refine your search query.</div>
   </script>
 
-  <script type="text/html" id="loadingTemplate">
+  <script type="text/html" id="progressTemplate">
     <div class="progress-bar">
       <span class="meter" style="width: 100%"></span>
     </div>
   </script>
 
+  <script type="text/html" id="loaderTemplate">
+    <div class="loader">
+      <div class="counter">Showing <%= currentPage %> of <%= totalPages %> Pages</div>
+      <% if (hasMorePages) { %>
+        <button class="loadMorePhotos">Load More</button>
+      <% } %>
+    </div>
+  </script>
+
   <script type="text/html" id="photosTemplate">
-    <ul class="photoList">
-      <% _.each(photos, function(photo) { %>
-        <li>
-          <a href="<%= photo.linkUrl %>" target="_blank">
-            <img src="<%= photo.url_sq %>" alt="<%= photo.title %>">
-            <span class="viewCount"><%= photo.views %></span>
-          </a>
-        </li>
-      <% }); %>
-    </ul>
+    <% _.each(photos, function(photo) { %>
+      <li>
+        <a href="<%= photo.linkUrl %>" target="_blank">
+          <img src="<%= photo.url_sq %>" alt="<%= photo.title %>">
+          <span class="viewCount"><%= photo.views %></span>
+        </a>
+      </li>
+    <% }); %>
   </script>
 
 

@@ -19,6 +19,8 @@ $(function() {
   var PhotoCollection = Backbone.Collection.extend({
     model: PhotoModel,
     queryString: '', // container for the query string
+    currentPage: 1,
+    totalPages: null,
 
 
     url: function () {
@@ -29,14 +31,23 @@ $(function() {
       url += '&extras=views,url_sq'; // include viewcount in query
       url += '&format=json';
       url += '&nojsoncallback=1';
+      url += '&page=' + this.currentPage;
+      url += '&per_page=45';
       return url;
     },
 
 
     parse: function (response) {
+      // bail if there's an error
       if (response.stat == 'fail') {
         return null;
       }
+
+      // Update page counters
+      this.currentPage = response.photos.page;
+      this.totalPages = response.photos.pages;
+
+      // return photos array for collection
       return response.photos.photo;
     }
   });
@@ -50,7 +61,8 @@ $(function() {
 
 
     events: {
-      'keyup #searchInput': 'search'
+      'keyup #searchInput': 'search',
+      'click .loadMorePhotos': 'loadMorePhotos'
     },
 
 
@@ -63,7 +75,8 @@ $(function() {
 
     getInlineTemplates: function () {
       this.placeholderTemplate = _.template( $('#placeholderTemplate').html() );
-      this.loadingTemplate = _.template( $('#loadingTemplate').html() );
+      this.progressTemplate = _.template( $('#progressTemplate').html() );
+      this.loaderTemplate = _.template( $('#loaderTemplate').html() );
       this.noResultsTemplate = _.template( $('#noResultsTemplate').html() );
       this.photosTemplate = _.template( $('#photosTemplate').html() );
     },
@@ -79,7 +92,7 @@ $(function() {
       this.queryString = newQueryString;
 
       if (this.queryString.length) {
-        this.renderLoading();
+        this.renderProgress();
         this.queryFlickr();
       } else {
         this.renderPlaceholder();
@@ -97,14 +110,33 @@ $(function() {
     },
 
 
-    renderLoading: function () {
-      this.$('.results').html( this.loadingTemplate() );
+    renderProgress: function () {
+      this.$('.results').html( this.progressTemplate() );
     },
 
 
     renderPhotos: function () {
-      var data = { photos: this.photoCollection.toJSON() };
-      this.$('.results').html( this.photosTemplate(data) );
+      var html = '<ul class="photoList">'
+      html += this.photosTemplate({
+        photos: this.photoCollection.toJSON()
+      });
+      html += '</ul>';
+
+      html += this.loaderTemplate({
+        totalPages: this.photoCollection.totalPages,
+        currentPage: this.photoCollection.currentPage,
+        hasMorePages: this.photoCollection.currentPage < this.photoCollection.totalPages
+      });
+
+      this.$('.results').html( html );
+    },
+
+
+    renderAdditionalPhotos: function () {
+      var newPhotos = this.photosTemplate({
+        photos: this.photoCollection.toJSON()
+      });
+      this.$('.photoList').append( newPhotos );
     },
 
 
@@ -115,7 +147,11 @@ $(function() {
       self.photoCollection.fetch({
         success: function (collection) {
           if (collection.length) {
-            self.renderPhotos();
+            if (collection.currentPage > 1) {
+              self.renderAdditionalPhotos();
+            } else {
+              self.renderPhotos();
+            }
           } else {
             self.renderNoResults();
           }
@@ -125,6 +161,12 @@ $(function() {
         }
       });
     }, 500),
+
+
+    loadMorePhotos: function () {
+      this.photoCollection.currentPage++;
+      this.queryFlickr();
+    }
   });
 
 
