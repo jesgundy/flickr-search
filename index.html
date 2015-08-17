@@ -51,12 +51,10 @@
   </script>
 
   <script type="text/html" id="loaderTemplate">
-    <div class="loader">
-      <div class="counter">Showing <%= currentPage %> of <%= totalPages %> Pages</div>
-      <% if (hasMorePages) { %>
-        <button class="loadMorePhotos">Load More</button>
-      <% } %>
-    </div>
+    <div class="counter">Showing <%= currentPage %> of <%= totalPages %> Pages</div>
+    <% if (hasMorePages) { %>
+      <button class="loadMorePhotos">Load More</button>
+    <% } %>
   </script>
 
   <script type="text/html" id="photosTemplate">

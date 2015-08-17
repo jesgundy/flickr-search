@@ -5,7 +5,7 @@ $(function() {
 
   var PhotoModel = Backbone.Model.extend({
     parse: function (response) {
-      // Map photo url (http://cl.ly/cFWK)
+      // Create link url (http://cl.ly/cFWK)
       response.linkUrl = 'https://www.flickr.com/photos/';
       response.linkUrl += response.owner + '/';
       response.linkUrl += response.id;
@@ -83,13 +83,18 @@ $(function() {
 
 
     search: function () {
+      // Remove white space
       var newQueryString = $.trim( this.$('#searchInput').val() );
 
+      // Bail if query hasn't changed
       if (newQueryString == this.queryString) {
         return;
       }
 
+      // Reset collection query & page counters
       this.queryString = newQueryString;
+      this.photoCollection.currentPage = 1;
+      this.photoCollection.totalPages = null;
 
       if (this.queryString.length) {
         this.renderProgress();
@@ -116,18 +121,23 @@ $(function() {
 
 
     renderPhotos: function () {
-      var html = '<ul class="photoList">'
+      // Build list container & contents
+      var html = '<ul class="photoList">';
       html += this.photosTemplate({
         photos: this.photoCollection.toJSON()
       });
       html += '</ul>';
 
+      // Build loader container and contents
+      html += '<div class="loader">';
       html += this.loaderTemplate({
         totalPages: this.photoCollection.totalPages,
         currentPage: this.photoCollection.currentPage,
         hasMorePages: this.photoCollection.currentPage < this.photoCollection.totalPages
       });
+      html += '</div>';
 
+      // Render HTML
       this.$('.results').html( html );
     },
 
@@ -137,6 +147,13 @@ $(function() {
         photos: this.photoCollection.toJSON()
       });
       this.$('.photoList').append( newPhotos );
+
+      var loaderHTML = this.loaderTemplate({
+        totalPages: this.photoCollection.totalPages,
+        currentPage: this.photoCollection.currentPage,
+        hasMorePages: this.photoCollection.currentPage < this.photoCollection.totalPages
+      });
+      this.$('.loader').html( loaderHTML );
     },
 
 
